@@ -651,7 +651,7 @@ static int battery_get_property(struct power_supply *psy,
 		break;
         /*end-160406-xmyyq-add POWER_SUPPLY_PROP_CURRENT_NOW property*/
 	case POWER_SUPPLY_PROP_batt_vol:
-		val->intval = data->BAT_batt_vol;
+		val->intval = data->BAT_batt_vol * 1000;
 		break;
 	case POWER_SUPPLY_PROP_batt_temp:
 		val->intval = data->BAT_batt_temp;
