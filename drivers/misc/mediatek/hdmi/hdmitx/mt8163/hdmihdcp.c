@@ -700,7 +700,7 @@ void HdcpService(enum HDCP_CTRL_STATE_T e_hdcp_state)
 	unsigned char bMask;
 
 	HDMI_HDCP_FUNC();
-	if (get_boot_mode() == FACTORY_BOOT) {
+	if (get_boot_mode() != FACTORY_BOOT) {
 		HDMI_HDCP_LOG("FACTORY_BOOT, Return Directly\n");
 		return;
 	}

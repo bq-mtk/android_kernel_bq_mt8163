@@ -284,7 +284,7 @@ unsigned int hdmi_drv_read(unsigned short u2Reg)
 void hdmi_drv_write(unsigned short u2Reg, unsigned int u4Data)
 {
 #if (defined(CONFIG_MTK_IN_HOUSE_TEE_SUPPORT) && defined(CONFIG_MTK_HDMI_HDCP_SUPPORT))
-	if (get_boot_mode() != FACTORY_BOOT) {
+	if (get_boot_mode() == FACTORY_BOOT) {
 		if (!((u2Reg == 0xca0) || (u2Reg == 0xca4)))
 			HDMI_DRV_LOG("[W]addr = 0x%04x, data = 0x%08x\n", u2Reg, u4Data);
 		ta_internal_hdmi_write(u2Reg, u4Data);
@@ -955,7 +955,7 @@ void vHDMIResetGenReg(unsigned char ui1resindex, unsigned char ui1colorspace)
 
 	vEnableNotice(TRUE);
 	/* vWriteHdmiIntMask(0xff); */
-	if (get_boot_mode() != FACTORY_BOOT)
+	if (get_boot_mode() == FACTORY_BOOT)
 		hdmi_black_pattern_set(ui1colorspace);
 
 	if (i4SharedInfo(SI_EDID_VSDB_EXIST) == TRUE)

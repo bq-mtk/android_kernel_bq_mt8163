@@ -353,7 +353,7 @@ int hdmi_internal_video_config(HDMI_VIDEO_RESOLUTION vformat,
 	av_hdmiset(HDMI_SET_VPLL, &_stAvdAVInfo, 1);
 	av_hdmiset(HDMI_SET_SOFT_NCTS, &_stAvdAVInfo, 1);
 	av_hdmiset(HDMI_SET_VIDEO_RES_CHG, &_stAvdAVInfo, 1);
-	if (get_boot_mode() != FACTORY_BOOT)
+	if (get_boot_mode() == FACTORY_BOOT)
 		av_hdmiset(HDMI_SET_HDCP_INITIAL_AUTH, &_stAvdAVInfo, 1);
 
 #if defined(MHL_BRIDGE_SUPPORT)

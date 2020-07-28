@@ -56,7 +56,7 @@ bool fgCaHDMICreate(void)
 {
 	TZ_RESULT tz_ret = 0;
 
-	if (get_boot_mode() != FACTORY_BOOT) {
+	if (get_boot_mode() == FACTORY_BOOT) {
 		tz_ret = KREE_CreateSession(TZ_TA_HDMI_UUID, &ca_hdmi_handle);
 		if (tz_ret != TZ_RESULT_SUCCESS) {
 			/* Should provide strerror style error string in UREE. */
@@ -89,7 +89,7 @@ void vCaHDMIWriteReg(unsigned int u4addr, unsigned int u4data)
 	TZ_RESULT tz_ret = 0;
 	MTEEC_PARAM param[2];
 
-	if (get_boot_mode() != FACTORY_BOOT) {
+	if (get_boot_mode() == FACTORY_BOOT) {
 		if (ca_hdmi_handle == 0) {
 			pr_err("[HDMI] TEE ca_hdmi_handle=0\n");
 			return;
@@ -101,7 +101,7 @@ void vCaHDMIWriteReg(unsigned int u4addr, unsigned int u4data)
 	param[1].value.a = u4data;
 	param[1].value.b = 0;
 
-	if (get_boot_mode() != FACTORY_BOOT) {
+	if (get_boot_mode() == FACTORY_BOOT) {
 		tz_ret = KREE_TeeServiceCall(ca_hdmi_handle, HDMI_TA_WRITE_REG,
 					     TZ_ParamTypes2(TZPT_VALUE_INPUT, TZPT_VALUE_INPUT),
 					     param);
